@@ -1,2 +1,2 @@
-# demo_smartTable_customBindingPath
-Change binding path of items in the smart table
+# demo_smartTable_customColumn_P13n
+[smart Control] Creating the custom column for SAPUI5 smart table
