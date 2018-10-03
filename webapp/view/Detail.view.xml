@@ -1,74 +1,98 @@
 <mvc:View controllerName="com.hq.test.EmployeeList_northWind.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.m.semantic" xmlns:smartTable="sap.ui.comp.smarttable">
+	xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns:smartTable="sap.ui.comp.smarttable">
 	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
 		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
 			<ObjectHeader id="objectHeader" title="{LastName}" numberUnit="{FirstName}"></ObjectHeader>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
-					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}">
-						<Table id="lineItemsList" width="auto" items="{Orders}" updateFinished="onListUpdateFinished"
-							noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
-							<headerToolbar>
-								<Toolbar id="lineItemsToolbar">
-									<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
-								</Toolbar>
-							</headerToolbar>
-							<columns>
-								<Column>
-									<Text text="{i18n>detailLineItemTableIDColumn}"/>
-								</Column>
-								<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-									<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
-								</Column>
-							</columns>
-							<items>
-								<ColumnListItem>
-									<cells>
-										<ObjectIdentifier title="{ShipAddress}" text="{OrderID}"/>
-										<ObjectNumber number="{ path: 'Freight', formatter: '.formatter.currencyValue' }"/>
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table>
-					</IconTabFilter>
-					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}" text="Direct Entityset">
-						<smartTable:SmartTable tableBindingPath="Territories" entitySet="Territories" id="smartTable" smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="false"
+					<IconTabFilter icon="sap-icon://product" tooltip="{i18n>detailIconTabBarAttachments}" text="Products">
+						<smartTable:SmartTable entitySet="Products" smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="false"
 							beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" header="Line Items" showRowCount="true"
 							persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" demandPopin="true" class="sapUiResponsiveContentPadding"
-							initiallyVisibleFields="RegionID,TerritoryDescription,TerritoryID"/>
-					</IconTabFilter>
-					<IconTabFilter id="iconTabBarFilter3" icon="sap-icon://warning" tooltip="{i18n>detailIconTabBarAttachments}" text="Navigation Property"> 
-						<Table id="lineItemsList2" width="auto" items="{Territories}" updateFinished="onListUpdateFinished"
-							noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
-							<headerToolbar>
-								<Toolbar id="lineItemsToolbar3">
-									<Title id="lineItemsHeader3" text="Teritories"/>
-								</Toolbar>
-							</headerToolbar>
+							initiallyVisibleFields="ProductName,QuantityPerUnit,UnitPrice,UnitsOnOrder,DisContinued,UnitsInStock">
+						<Table>
 							<columns>
 								<Column>
-									<Text text="{i18n>detailLineItemTableIDColumn}"/>
-								</Column>
-								<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-									<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+									<customData>
+										<core:CustomData key="p13nData"
+											value='\{"columnKey": "UnitsInStock", "leadingProperty": "UnitsInStock", "sortProperty": "UnitsInStock", "filterProperty": "UnitsInStock", "columnIndex": 5}'/>
+									</customData>
+									<Text text="{i18n>UnitsInStock2}"></Text>
 								</Column>
 							</columns>
 							<items>
-								<ColumnListItem>
-									<cells>
-										<ObjectIdentifier title="{TerritoryDescription}" text="{TerritoryID}"/>
-										<ObjectNumber number="{ path: 'RegionID', formatter: '.formatter.currencyValue' }"/>
-									</cells>
+								<ColumnListItem >
+									<ObjectStatus text="{UnitsInStock}" state="{path: 'UnitsInStock', formatter: '.formatter.DisContinuedStatus'}"></ObjectStatus>
 								</ColumnListItem>
 							</items>
 						</Table>
-					</IconTabFilter>
-				</items>
-			</IconTabBar>
-		</semantic:content>
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-	</semantic:DetailPage>
+					</smartTable:SmartTable>
+				</IconTabFilter>
+				<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}">
+					<Table id="lineItemsList" width="auto" items="{Orders}" updateFinished="onListUpdateFinished"
+						noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<Toolbar id="lineItemsToolbar">
+								<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<Text text="{i18n>detailLineItemTableIDColumn}"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+								<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="{ShipAddress}" text="{OrderID}"/>
+									<ObjectNumber number="{ path: 'Freight', formatter: '.formatter.currencyValue' }"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</IconTabFilter>
+				<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}" text="Smart table">
+					<smartTable:SmartTable tableBindingPath="Territories" entitySet="Territories" id="smartTable" smartFilterId="smartFilterBar"
+						tableType="ResponsiveTable" useExportToExcel="false" beforeExport="onBeforeExport" useVariantManagement="true"
+						useTablePersonalisation="true" header="Line Items" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored"
+						enableAutoBinding="true" demandPopin="true" class="sapUiResponsiveContentPadding"
+						initiallyVisibleFields="RegionID,TerritoryDescription,TerritoryID"/>
+				</IconTabFilter>
+				<IconTabFilter id="iconTabBarFilter3" icon="sap-icon://warning" tooltip="{i18n>detailIconTabBarAttachments}" text="Navigation Property">
+					<Table id="lineItemsList2" width="auto" items="{Territories}" updateFinished="onListUpdateFinished"
+						noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<Toolbar id="lineItemsToolbar3">
+								<Title id="lineItemsHeader3" text="Teritories"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<Text text="{i18n>detailLineItemTableIDColumn}"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+								<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<ObjectIdentifier title="{TerritoryDescription}" text="{TerritoryID}"/>
+									<ObjectNumber number="{ path: 'RegionID', formatter: '.formatter.currencyValue' }"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+	</semantic:content>
+	<semantic:sendEmailAction>
+		<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+	</semantic:sendEmailAction>
+</semantic:DetailPage>
 </mvc:View>
