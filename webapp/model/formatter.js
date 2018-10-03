@@ -17,7 +17,7 @@ sap.ui.define([], function () {
 			return parseFloat(sValue).toFixed(2);
 		},
 
-		DisContinuedStatus: function (iNo) {
+		StockStatus: function (iNo) {
 			if (iNo < 50) {
 				if (iNo < 20) {
 				return sap.ui.core.ValueState.Error;
