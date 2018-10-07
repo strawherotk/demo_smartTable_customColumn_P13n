@@ -21,7 +21,43 @@ sap.ui.define([
 			var oViewModel = new JSONModel({
 				busy: false,
 				delay: 0,
-				lineItemListTitle: this.getResourceBundle().getText("detailLineItemTableHeading")
+				lineItemListTitle: this.getResourceBundle().getText("detailLineItemTableHeading"),
+				ProductList: [{
+					"ProductID": 1,
+					"ProductName": "Chai",
+					"SupplierID": 1,
+					"CategoryID": 1,
+					"QuantityPerUnit": "10 boxes x 20 bags",
+					"UnitPrice": "18.0000",
+					"UnitsInStock": 39,
+					"UnitsOnOrder": 0,
+					"ReorderLevel": 10,
+					"Discontinued": false
+				},
+				{
+					"ProductID": 2,
+					"ProductName": "Bottle",
+					"SupplierID": 2,
+					"CategoryID": 2,
+					"QuantityPerUnit": "10 boxes x 30 bags",
+					"UnitPrice": "67.0000",
+					"UnitsInStock": 39,
+					"UnitsOnOrder": 5,
+					"ReorderLevel": 10,
+					"Discontinued": false
+				},
+				{
+					"ProductID": 3,
+					"ProductName": "Lovely thing",
+					"SupplierID": 1,
+					"CategoryID": 2,
+					"QuantityPerUnit": "1 boxes x 5 bags",
+					"UnitPrice": "45.0000",
+					"UnitsInStock": 34,
+					"UnitsOnOrder": 10,
+					"ReorderLevel": 10,
+					"Discontinued": true
+				}]
 			});
 
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
@@ -69,6 +105,10 @@ sap.ui.define([
 				}
 				oViewModel.setProperty("/lineItemListTitle", sTitle);
 			}
+		},
+
+		onProductReceived: function (oEvent) {
+			this.console.log(oEvent);
 		},
 
 		/* =========================================================== */

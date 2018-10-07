@@ -10,7 +10,8 @@
 						<smartTable:SmartTable entitySet="Products" smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="false"
 							beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" header="Line Items" showRowCount="true"
 							persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" demandPopin="true" class="sapUiResponsiveContentPadding"
-							initiallyVisibleFields="ProductName,QuantityPerUnit,UnitPrice,UnitsOnOrder,DisContinued,UnitsInStock"></smartTable:SmartTable>
+							initiallyVisibleFields="ProductName,QuantityPerUnit,UnitPrice,UnitsOnOrder,DisContinued,UnitsInStock"
+							dataReceived="onProductReceived">
 							<Table>
 								<columns>
 									<Column>
@@ -29,7 +30,7 @@
 							</Table>
 						</smartTable:SmartTable>
 					</IconTabFilter>
-					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}">
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="Orders - normal table" text="Orders - normal table">
 						<Table id="lineItemsList" width="auto" items="{Orders}" updateFinished="onListUpdateFinished"
 							noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
 							<headerToolbar>
@@ -87,6 +88,24 @@
 								</ColumnListItem>
 							</items>
 						</Table>
+					</IconTabFilter>
+					
+					<IconTabFilter icon="sap-icon://group-2" tooltip="{i18n>detailIconTabBarAttachments}" text="JSON Model">
+						<smartTable:SmartTable entitySet="Products" tableBindingPath="detailView>/ProductList" smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="false"
+							beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" header="Line Items" showRowCount="true"
+							persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" demandPopin="true" class="sapUiResponsiveContentPadding"
+							initiallyVisibleFields="ProductName,UnitPrice,UnitsOnOrder">
+							<Table>
+								<items>
+									<ColumnListItem >
+										<ObjectAttribute text="{detailView>ProductName}"></ObjectAttribute>
+										<ObjectAttribute text="{detailView>UnitPrice}"></ObjectAttribute>
+										<ObjectAttribute text="{detailView>UnitsOnOrder}"></ObjectAttribute>
+										
+									</ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
 					</IconTabFilter>
 					
 				</items>
